@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 export default function useRecorder() {
   const [isRecording, setisRecording] = useState<boolean>(false);
-  const [isSupported, setIsSupported] = useState<boolean>(false);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
     null
   );
@@ -15,7 +14,7 @@ export default function useRecorder() {
   const [videoData, setVideoData] = useState<string>();
 
   useEffect(() => {
-    if (mediaRecorder && isSupported) {
+    if (mediaRecorder) {
       mediaRecorder.addEventListener("dataavailable", (e) => {
         const uri = URL.createObjectURL(e.data);
         setVideoData(uri);
@@ -27,14 +26,6 @@ export default function useRecorder() {
       });
     }
   }, [mediaRecorder, isRecording]);
-
-  useEffect(() => {
-    if (navigator.mediaDevices) {
-      setIsSupported(true);
-    } else {
-      setIsSupported(false);
-    }
-  });
 
   const starRecording = async () => {
     if (!isRecording && navigator.mediaDevices) {
@@ -57,5 +48,5 @@ export default function useRecorder() {
     }
   };
 
-  return { isRecording, isSupported, starRecording, stopRecording, videoData };
+  return { isRecording, starRecording, stopRecording, videoData };
 }

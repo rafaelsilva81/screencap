@@ -1,16 +1,8 @@
 import useRecorder from "../utils/useScreenCapture";
 
 function App() {
-  const { isRecording, isSupported, starRecording, stopRecording, videoData } =
+  const { isRecording, starRecording, stopRecording, videoData } =
     useRecorder();
-
-  {
-    !isSupported && (
-      <div>
-        <h1>Sorry, your browser does not support screen recording</h1>
-      </div>
-    );
-  }
 
   return (
     <div
