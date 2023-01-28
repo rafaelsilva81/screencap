@@ -1,7 +1,7 @@
 import useRecorder from "../utils/useScreenCapture";
 
 function App() {
-  const { isRecording, starRecording, stopRecording, videoData } =
+  const { isRecording, startRecording, stopRecording, videoUrl } =
     useRecorder();
 
   return (
@@ -15,7 +15,7 @@ function App() {
         className="bg-violet-500 hover:bg-violet-700
         text-white font-bold py-2 px-4 rounded
         "
-        onClick={starRecording}
+        onClick={startRecording}
       >
         Start Recording
       </button>
@@ -31,14 +31,14 @@ function App() {
 
       {isRecording && <div>Recording...</div>}
 
-      {videoData && (
+      {videoUrl && (
         <>
-          <video src={videoData} controls width={"500px"}></video>
+          <video src={videoUrl} controls width={"500px"}></video>
           <a
-            href={videoData}
+            href={videoUrl}
             className="bg-green-500 hover:bg-green-700
-          text-white font-bold py-2 px-4 rounded
-            "
+            text-white font-bold py-2 px-4 rounded
+              "
             download="video.mp4"
           >
             Download
